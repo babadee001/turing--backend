@@ -3,6 +3,7 @@ import logger from 'morgan';
 import bodyParser from 'body-parser';
 import validator from 'express-validator';
 import DepartmentRouter from './server/routes/departments';
+import CategoriesRouter from './server/routes/categories';
 
 const app = express();
 
@@ -11,11 +12,16 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(logger('dev'));
 app.use(validator());
 app.use('/departments', DepartmentRouter);
+app.use('/categories', CategoriesRouter);
 
 const port = process.env.PORT || 3000;
 
 app.get('/', (req, res) => {
   res.send('Welcome to tucommerce');
+});
+
+app.get('*', (req, res) => {
+  res.status(400).send('NOT FOUND');
 });
 
 app.listen(port, () => {
