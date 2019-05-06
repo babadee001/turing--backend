@@ -1,5 +1,7 @@
 import mysql from 'mysql';
+import dotenv from 'dotenv';
 
+dotenv.config();
 const client = mysql.createConnection({
   multipleStatements: true,
   host: process.env.host,
@@ -8,6 +10,6 @@ const client = mysql.createConnection({
   database: process.env.database,
 });
 client.connect((error) => {
-  if (error) throw error;
+  if (error) { console.log(error); }
 });
 export default client;
