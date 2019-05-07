@@ -4,6 +4,7 @@ import bodyParser from 'body-parser';
 import validator from 'express-validator';
 import DepartmentRouter from './server/routes/departments';
 import CategoriesRouter from './server/routes/categories';
+import AttributesRouter from './server/routes/attributes';
 
 const app = express();
 
@@ -11,6 +12,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(logger('dev'));
 app.use(validator());
+app.use('/attributes', AttributesRouter);
 app.use('/departments', DepartmentRouter);
 app.use('/categories', CategoriesRouter);
 
@@ -21,7 +23,9 @@ app.get('/', (req, res) => {
 });
 
 app.get('*', (req, res) => {
-  res.status(400).send('NOT FOUND');
+  res.status(404).send({
+    message: 'Endpoint not found.',
+  });
 });
 
 app.listen(port, () => {

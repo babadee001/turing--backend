@@ -4,6 +4,7 @@ const noExist = (table) => {
     department: 'DEP',
     category: 'CAT',
     product: 'PRO',
+    attribute: 'ATT',
   };
   if (table in abbreviations) {
     code = (abbreviations[table]);

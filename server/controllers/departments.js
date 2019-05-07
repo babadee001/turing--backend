@@ -15,7 +15,7 @@ class Departments {
   }
 
   static getDepartment(req, res) {
-    db.query(queries.getOne('department', req.params.department_id), (error, results) => {
+    db.query(queries.getOne('department', 'department_id', req.params.department_id), (error, results) => {
       if (error) {
         throw error;
       }
