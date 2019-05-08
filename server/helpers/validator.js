@@ -1,3 +1,5 @@
+import { check } from 'express-validator/check';
+
 export default {
   checkId(req, res, next) {
     const suppliedParams = Object.keys(req.params);
@@ -25,9 +27,73 @@ export default {
     }
     next();
   },
-  validateBody(req, res, next) {
-    const { b } = req;
-    res.send();
+  validateQuery(req, res, next) {
+    if (!req.query.all_words) {
+      req.query.all_words = 'on';
+    }
+    if (!req.query.page) {
+      req.query.page = 1;
+    }
+    if (!req.query.limit) {
+      req.query.limit = 20;
+    }
+    if (!req.query.description_length) {
+      req.query.description_length = 200;
+    }
+    req.checkQuery({
+      page: {
+        isInt: true,
+        errorMessage: 'Enter a valid page number',
+      },
+      limit: {
+        isInt: true,
+        errorMessage: 'Enter a valid limit',
+      },
+      description_length: {
+        isInt: true,
+        errorMessage: 'Enter a valid description length',
+      },
+    });
+    const errors = req.validationErrors();
+    if (errors) {
+      const allErrors = [];
+      errors.forEach((error) => {
+        const errorMessage = error.msg;
+        allErrors.push(errorMessage);
+      });
+      return res.status(400)
+        .json({
+          message: allErrors[0],
+        });
+    }
+    next();
+  },
+  validateString(req, res, next) {
+    if (!req.query.all_words) {
+      req.query.all_words = 'on';
+    }
+    req.checkQuery({
+      query_string: {
+        notEmpty: true,
+        errorMessage: 'Enter a valid query string',
+      },
+      all_words: {
+        notEmpty: true,
+        isAlpha: true,
+      },
+    });
+    const errors = req.validationErrors();
+    if (errors) {
+      const allErrors = [];
+      errors.forEach((error) => {
+        const errorMessage = error.msg;
+        allErrors.push(errorMessage);
+      });
+      return res.status(400)
+        .json({
+          message: allErrors[0],
+        });
+    }
     next();
   },
 };
