@@ -22,7 +22,7 @@ class Categories {
       }
       if (results.length === 0) {
         return res.status(400).send(
-          validate('category'),
+          validate.noExist('category'),
         );
       }
       return res.status(200).send(results);
@@ -36,7 +36,7 @@ class Categories {
       }
       if (results.length === 0) {
         return res.status(400).send(
-          validate('product'),
+          validate.noExist('product'),
         );
       }
       db.query(queries.getOne('category', 'category_id', results[0].category_id), (err, result) => {
@@ -58,7 +58,7 @@ class Categories {
       }
       if (results.length === 0) {
         return res.status(400).send(
-          validate('department'),
+          validate.noExist('department'),
         );
       }
       return res.status(200).send(results);

@@ -49,7 +49,7 @@ class Products {
       }
       if (results[0].length === 0) {
         return res.status(400).send(
-          validate('product'),
+          validate.noExist('product'),
         );
       }
       return res.status(200).send(results[0]);
@@ -63,7 +63,7 @@ class Products {
       }
       if (results[0].length === 0) {
         return res.status(400).send(
-          validate('product'),
+          validate.noExist('product'),
         );
       }
       return res.status(200).send(results[0]);
@@ -77,7 +77,7 @@ class Products {
       }
       if (results[0].length === 0) {
         return res.status(400).send(
-          validate('product'),
+          validate.noExist('product'),
         );
       }
       return res.status(200).send(results[0]);
@@ -91,7 +91,7 @@ class Products {
       }
       if (results.length === 0) {
         return res.status(400).send(
-          validate('product'),
+          validate.noExist('product'),
         );
       }
       return res.status(200).send(results);
