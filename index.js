@@ -5,6 +5,7 @@ import validator from 'express-validator';
 import passport from 'passport';
 import session from 'express-session';
 import FacebookTokenSTrategy from 'passport-facebook-token';
+
 import DepartmentRouter from './server/routes/departments';
 import CategoriesRouter from './server/routes/categories';
 import AttributesRouter from './server/routes/attributes';
