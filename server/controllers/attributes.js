@@ -21,7 +21,7 @@ class Attributes {
       }
       if (results.length === 0) {
         return res.status(400).send(
-          validate.noExist('attribute'),
+          validate('attribute'),
         );
       }
       return res.status(200).send(results);
@@ -35,7 +35,7 @@ class Attributes {
       }
       if (results[0].length === 0) {
         return res.status(400).send(
-          validate.noExist('attribute'),
+          validate('attribute'),
         );
       }
       return res.status(200).send(results[0]);
@@ -49,7 +49,7 @@ class Attributes {
       }
       if (results[0].length === 0) {
         return res.status(400).send(
-          validate.noExist('product'),
+          validate('product'),
         );
       }
       return res.status(200).send(results[0]);

@@ -21,7 +21,7 @@ class Departments {
       }
       if (results.length === 0) {
         return res.status(400).send(
-          validate.noExist('department'),
+          validate('department'),
         );
       }
       return res.status(200).send(results);
